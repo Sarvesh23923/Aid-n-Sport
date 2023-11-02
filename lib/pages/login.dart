@@ -1,103 +1,199 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, implementation_imports, unnecessary_import, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors
 
 import 'package:ans/pages/welcome.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:iconly/iconly.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<Login> createState() => _LoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  var focusNodeEmail = FocusNode();
-  var focusNodePassword = FocusNode();
-  bool isFocusedEmail = false;
-  bool isFocusedPassword = false;
+class _LoginState extends State<Login> {
+  double logoHeight = 0;
+  double textFieldsOpacity = 0;
+  double textFieldsOffset = 20; // Adjust this value as needed
 
   @override
   void initState() {
-    focusNodeEmail.addListener(() {
-      setState(() {
-        isFocusedEmail = focusNodeEmail.hasFocus;
-      });
-    });
-
-    focusNodePassword.addListener(() {
-      setState(() {
-        isFocusedPassword = focusNodePassword.hasFocus;
-      });
-    });
     super.initState();
+    // Delayed entrance animations
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        logoHeight = 120; // Adjust this value as needed
+      });
+    });
+    Future.delayed(const Duration(milliseconds: 800), () {
+      setState(() {
+        textFieldsOpacity = 1;
+        textFieldsOffset = 0; // Adjust this value as needed
+      });
+    });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.transparent,
+        elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => WelcomePage())));
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return WelcomePage();
+            }));
+          },
+          icon: Icon(
+            IconlyLight.arrow_left_2,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              "Hey there, you've been missed out",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(right: 160),
-            child: Text(
-              "Sign in and continue",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black),
-            ),
-          ),
-          SizedBox(height: 100),
-          Padding(
-            padding: const EdgeInsets.only(right: 300),
-            child: Text(
-              "Email",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 0.8),
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: .3),
-            decoration: BoxDecoration(
-                color: isFocusedEmail ? Colors.white : Color(0xFFF1F0F5),
-                borderRadius: BorderRadius.circular(50)),
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Your Email',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 35, left: 15),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                height: logoHeight,
+                child: Image.asset(
+                  "assets/Aid-Nsport.png",
+                  height: 120,
+                ),
               ),
-              focusNode: focusNodeEmail,
             ),
-          )
-        ],
+            SizedBox(
+              height: 35,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 75, right: 60),
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 500),
+                opacity: textFieldsOpacity,
+                child: Container(
+                  transform: Matrix4.translationValues(0, textFieldsOffset, 0),
+                  child: Text(
+                    "Login To Your Account",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 500),
+                opacity: textFieldsOpacity,
+                child: Container(
+                  transform: Matrix4.translationValues(0, textFieldsOffset, 0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 500),
+                opacity: textFieldsOpacity,
+                child: Container(
+                  transform: Matrix4.translationValues(0, textFieldsOffset, 0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            // "Sign In" button
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 500),
+              opacity: textFieldsOpacity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  primary: const Color.fromARGB(255, 254, 37, 37),
+                  textStyle: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onPressed: () {
+                  // Add your sign-in logic here
+                },
+                child: Text("Login"),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            AnimatedOpacity(
+              opacity: textFieldsOpacity,
+              duration: const Duration(milliseconds: 1200),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Don\'t have an account?',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 4, 0, 255),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ))
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

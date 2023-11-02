@@ -89,13 +89,13 @@ class _WelcomePageState extends State<WelcomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    builder: (context) => Login(),
                                   ));
                             },
                             child: FadeInUp(
                                 delay: const Duration(milliseconds: 1100),
                                 duration: const Duration(milliseconds: 1200),
-                                child: Text('Sign In')),
+                                child: Text('Login')),
                             style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 textStyle: TextStyle(
