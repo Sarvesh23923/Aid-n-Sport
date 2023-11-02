@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 35, left: 15),
+              padding: const EdgeInsets.only(right: 35, left: 35),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 500),
                 height: logoHeight,
@@ -138,7 +138,26 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 230),
+              child: AnimatedOpacity(
+                  opacity: textFieldsOpacity,
+                  duration: Duration(milliseconds: 500),
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 0, 0),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ))),
+            ),
+            SizedBox(
+              height: 5,
             ),
             // "Sign In" button
             AnimatedOpacity(
@@ -184,7 +203,7 @@ class _LoginState extends State<Login> {
                       child: const Text(
                         'Register',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 4, 0, 255),
+                          color: Color.fromARGB(255, 255, 0, 0),
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                         ),
